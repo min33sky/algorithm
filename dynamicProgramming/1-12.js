@@ -6,17 +6,20 @@
 const arr = [10, 2, 6, 4, 5, 3, 2, 8];
 
 function bubbleSort(num) {
-  if (num === 0) {
+  // 종료 조건
+  if (num === 1) {
     console.log(arr);
     return;
   }
 
+  // 1회 탐색
   for (let i = 0; i < num - 1; i++) {
     if (arr[i] > arr[i + 1]) {
       swap(i, i + 1);
     }
   }
 
+  // 더 작은 범위의 인수로 재귀호출
   return bubbleSort(num - 1);
 }
 

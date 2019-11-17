@@ -4,7 +4,6 @@
  */
 
 const arr = [9, 6, 2, 12, 11, 9, 3, 7];
-const arr2 = [10, 2, 6, 4, 5, 3, 2, 8];
 
 function bubbleSort() {
   for (let i = 0; i < arr.length - 1; i++) {
@@ -18,7 +17,7 @@ function bubbleSort() {
   console.log(arr);
 }
 
-function swap(i, j) {
+function swap(arr, i, j) {
   arr[i] = arr[i] + arr[j];
   arr[j] = arr[i] - arr[j];
   arr[i] = arr[i] - arr[j];

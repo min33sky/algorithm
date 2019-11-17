@@ -1,5 +1,11 @@
 /**
- * 하노이의 탑
+ * * 하노이의 탑
+ * - 큰 문제 : (n개의 블럭을 Start에서 extra를 거쳐 Destination으로 이동시킨다.)
+ * - 작은 문제 :
+ * 1. n-1개의 블럭을 start에서 destination을 거쳐 extra로 이동시킨다.
+ * 2. n번째 블럭을 destination으로 이동시킨다.
+ * 3. n-1개의 블럭을 extra에서 start를 거쳐 destination으로 이동시킨다.
+ * ! 1번과 3번은 큰 문제와 같은 유형의 문제기 때문에 재귀를 통해서 해결
  */
 
 function hanoiTower(start, destination, extra, num) {
