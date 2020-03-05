@@ -1,5 +1,6 @@
+// @ts-nocheck
 /**
- * 앞뒤가 같은 10진수&2진수&8진수 찾기
+ * 앞뒤가 같은 10진수 & 2진수 & 8진수 찾기
  * - 10이상 10진수에서 최소값을 구하라
  */
 
@@ -15,6 +16,7 @@ String.prototype.reverse = function() {
 
 // 11부터 탐색 개시
 let num = 11;
+
 while (true) {
   if (
     num.toString() === num.toString().reverse() &&
@@ -24,5 +26,8 @@ while (true) {
     console.log(num);
     break;
   }
+
+  // ! 끝이 0이면 앞도 0이어야 하지만 0으로 시작하는 이진수는 0밖에 없으므로
+  // ! 홀수만 조건에 만족한다.
   num += 2;
 }
