@@ -1,10 +1,11 @@
-let str = 'abcde';
-
-let result = [];
-
-for (let i = 0; i < str.length; i++) {
-  if (i % 2 !== 0) continue;
-  result.push(str[i].concat(str[i + 1] ? str[i + 1] : '_'));
+function backwardStringByWord(text: string) {
+  // your code here
+  return text
+    .split(' ')
+    .map((v) => v.split('').reverse().join(''))
+    .join(' ');
 }
 
-console.log(result);
+console.log(backwardStringByWord('hello   world'));
+
+console.log('abc'.split('').reverse().join(''));
