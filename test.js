@@ -1,7 +1,3 @@
-const arr = [1, 2, 3, 4, 5];
+const arr = 'abcdefgh';
 
-const copyArr = arr.slice(0);
-
-copyArr.shift();
-
-console.log(arr, copyArr);
+console.log(arr.slice(3, 4));
