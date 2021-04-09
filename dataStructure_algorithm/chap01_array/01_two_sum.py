@@ -29,6 +29,7 @@ def twoSum2(nums: List[int], target: int) -> List[int]:
     for i in range(0, len(nums)):
         value = target - nums[i]
 
+        # 해시테이블에 값이 존재하고 중복값이 아닐 경우 정답
         if hashTable_dict.get(value) is not None and hashTable_dict.get(value) != i:
             return sorted([i, hashTable_dict[value]])
 
