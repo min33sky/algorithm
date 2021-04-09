@@ -11,6 +11,7 @@ def removeDuplicates(nums: List[int]) -> int:
     if len(nums) <= 0:
         return 0
 
+    # 첫 번째 요소는 중복이 아니므로 확정
     cnt = 1
     curr = nums[0]
 
