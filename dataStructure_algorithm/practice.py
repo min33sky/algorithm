@@ -77,6 +77,16 @@
 # res = [item * 2 if item > 5 else item * 3 for item in py_list]
 # print(res)
 
-print(bin(0 | 8))
-print(bin(1 | 8))
-print(bin(2 | 8))
+# print(bin(0 | 8))
+# print(bin(1 | 8))
+# print(bin(2 | 8))
+
+def outer(number):
+    outer_num = 5
+
+    def inner():
+        print(f'total: {number + outer_num}')
+    inner()
+
+
+print(outer(7))
