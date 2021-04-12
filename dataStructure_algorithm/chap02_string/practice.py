@@ -1,3 +1,4 @@
+import string
 from collections import defaultdict
 
 # %-포멧
@@ -40,3 +41,10 @@ hashmap = defaultdict(list)
 print(hashmap)
 hashmap['aet'].append('eat')
 print(hashmap)
+
+
+s = 'abcd22'
+result = [c in string.hexdigits for c in s]
+print(result)
+
+print(all(result))

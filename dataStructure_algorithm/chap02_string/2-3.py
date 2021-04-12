@@ -1,5 +1,6 @@
 # 회문 (Palindrome) 확인
 
+
 Input_value = "Abbc,c bb.A"
 
 # 방법 1) 단순히 확인하면서 풀기
