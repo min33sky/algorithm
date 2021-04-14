@@ -44,5 +44,7 @@ def group_sum(nums: List[int], subset: List[bool], target: int, index: int) -> b
 
 nums = [1, 2]
 subset = [False] * len(nums)
+target = 3
+index = 0
 
-print(group_sum(nums, subset, 3, 0))
+print(group_sum(nums, subset, target, index))
