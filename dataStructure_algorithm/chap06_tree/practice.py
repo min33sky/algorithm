@@ -1,4 +1,8 @@
+from collections import deque
+import heapq
+
 # 이진 트리
+
 
 class Node:
     def __init__(self, data):
@@ -191,6 +195,7 @@ class BinarySearchTree:
             else:
                 parent.right = node
 
+    # DFS (깊이 우선 탐색)
     def depth_first_search(self):
         res_iter = []
         res_rec = []
@@ -200,6 +205,7 @@ class BinarySearchTree:
         print(f'dfs iter : {res_iter}')
         print(f'dfs rec : {res_rec}')
 
+    # 반복으로 깊이 우선 탐색 적용
     def dfs_iter(self):
         if not self.__root:
             return []
@@ -222,6 +228,7 @@ class BinarySearchTree:
 
         return result
 
+    # 재귀로 깊이 우선 탐색
     def dfs_rec(self, node, result):
         if not node:
             return
@@ -231,6 +238,27 @@ class BinarySearchTree:
             self.dfs_rec(node.left, result)
         if node.right:
             self.dfs_rec(node.right, result)
+
+    def breadth_first_search(self):
+        queue = deque()
+        res = []
+
+        queue.append(self.__root)
+
+        while len(queue) != 0:
+            qsize = len(queue)
+
+            for _ in range(qsize):
+                node = queue.popleft()
+
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+                res.append(node)
+
+        print(f'breadth first search: {res}')
 
 
 bst = BinarySearchTree()
@@ -262,3 +290,32 @@ print(f'find 0: {bst.find(0)}')
 print(bst.inorder_traverse())
 
 bst.depth_first_search()
+bst.breadth_first_search()
+
+# 리스트 heap 생성
+heap = []
+# heapq를 이용해 데이터 추가
+heapq.heappush(heap, 35)
+heapq.heappush(heap, 33)
+heapq.heappush(heap, 42)
+heapq.heappush(heap, 10)
+heapq.heappush(heap, 14)
+# 최소값이 맨 앞
+print(heap)
+# 최솟값 꺼내기
+print(heapq.heappop(heap))
+print(heap)
+# 최솟값 확인(삭제 x)
+print(heap[0])
+# 기존 리스트를 heap으로 만들기
+heap = [35, 44, 42, 10, 14]
+heapq.heapify(heap)
+print(heap)
+
+# 최대 힙으로 변경해서 사용하기
+heap = [35, 44, 42, 10, 14]
+heap_max = [item * -1 for item in heap]
+print(heap_max)
+heapq.heapify(heap_max)
+print(heap_max)
+print(f'최대값: {heap_max[0] * -1}')
