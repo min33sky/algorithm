@@ -12,7 +12,7 @@ def pathSum(root, sum):
     if root == None:
         return cnt
 
-    # 부분 합을 구할 함수
+    # 부분 경로 합 구하기
     def pathSumSub(node, target):
         if node == None:
             return 0

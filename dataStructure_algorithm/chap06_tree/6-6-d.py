@@ -10,6 +10,7 @@ def pathSum(root, sum):
     if root == None:
         return 0
 
+    # 경고의 부분 경로 합 계산 함수
     def pathSumSub(node, target):
         if node == None:
             return 0
@@ -18,6 +19,7 @@ def pathSum(root, sum):
             pathSumSub(node.left, target - node.data) + \
             pathSumSub(node.right, target - node.data)
 
+    # 루트 노드의 부분 경로 합 + 왼쪽자식을 루트로 하는 경로 합 + 오른쪽 자식을 루트로 하는 경로 합
     return pathSumSub(root, sum) + \
         pathSum(root.left, sum) + \
         pathSum(root.right, sum)
