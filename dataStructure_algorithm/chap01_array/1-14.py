@@ -1,45 +1,87 @@
-# 단어 찾기
+from typing import List
 
-def exist(board, word):
-    # 이동 가능 방향 (좌, 우, 상, 하)
+tests = {
+    1: ([
+        ["A", "B", "C", "E"],
+        ["S", "F", "E", "S"],
+        ["A", "D", "E", "E"]
+    ], "BFEE"),
+    2: ([
+        ["A", "B", "C", "E"],
+        ["S", "F", "S", "D"],
+        ["A", "D", "E", "D"]
+    ], "BFSE"),
+    3: ([
+        ["A", "B", "C", "E"],
+        ["S", "F", "S", "D"],
+        ["A", "D", "E", "D"]
+    ], "BFST")
+}
+
+res = {
+    1: True,
+    2: True,
+    3: False
+}
+
+
+def check_result(index: int, output: int):
+    if index > len(tests):
+        raise RuntimeError(f'Failed to get {index}th case')
+    return res.get(index, False) == output
+
+
+def exist(board: List[List[str]], word: str) -> bool:
+    # 이동 가능한 방향
     direction = [[-1, 0], [1, 0], [0, -1], [0, 1]]
 
-    def search_direction(x, y, subword):
-        # board 범위를 넘어가면 재귀 호출 종료
-        if (x < 0 or x >= len(board)) or (y < 0 or y >= len(board[0])):
+    def search_direction(x: int, y: int, subword: str):
+        # board 배열의 범위를 넘어서면 False
+        if (x < 0 or x >= len(board)) or \
+           (y < 0 or y >= len(board[0])):
             return False
 
-        # 현재 위치에 단어가 찾을 단어와 다를 경우 종료
+        # 첫번째 문자와 같지 않다면 False 반환
         if board[x][y] != subword[0]:
             return False
 
-        # 일치하는 단어가 존재하고 부분 문자열의 남은 길이가 1일땐 True
+        # 첫 문자와 동일하고 글자 길이가 1이라면 True 반환
         if len(subword) == 1:
             return True
 
-        # 현재 단어를 다시 확인하지 않게 (중복 처리하지 않게) 값을 변경
+        # 중복 검사를 막기 위해서 이미 체크했다고 표시를 한다.
         board[x][y] = '.'
 
         for i, j in direction:
-            if search_direction(x + i, y + j, subword[1:]):
+            if search_direction(x + i, y + j,
+                                subword[1:]):
                 return True
 
-        # 재귀 호출로 검색 결과 일치하지 않기 때문에 다시 상태 복구
+        # 재귀 호출 결과 정답이 없으므로 원상복구 시킨다.
         board[x][y] = subword[0]
         return False
 
-    result = False
-
+    res = False
     for x in range(len(board)):
         for y in range(len(board[0])):
-            if board[x][y] == word[0] and search_direction(x, y, word):
-                result = True
+            if board[x][y] == word[0] and \
+               search_direction(x, y, word):
+                res = True
                 break
+    return res
 
-    return result
+
+def main():
+    for index, data in tests.items():
+        board = data[0]
+        word = data[1]
+        res = exist(board, word)
+
+        if check_result(index, res):
+            print(f'Test case {index} is correct: value {res}')
+        else:
+            print(f'Test case {index} is failed: value {res}')
 
 
-board = [['A', 'C', 'B'], ['G', 'O', 'G'], ['I', 'J', 'D']]
-word = 'COGD'
-
-print(exist(board, word))
+if __name__ == '__main__':
+    main()
