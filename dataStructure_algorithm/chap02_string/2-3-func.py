@@ -17,40 +17,16 @@ res = {
 }
 
 
-def isPalindrome(word: str):
-    # 두 개의 포인터 생성
-    i = 0
-    j = len(word) - 1
-
-    # 문자열을 소문자로 변경
-    word = word.lower()
-
-    while i < j:
-        while i < j:
-            if word[i].isalnum():
-                break
-            i += 1
-
-        while i < j:
-            if word[j].isalnum():
-                break
-            j -= 1
-
-        if word[i] != word[j]:
-            return False
-
-        i += 1
-        j -= 1
-
-    return True
-
-    pass
-
-
 def check_result(index: int, output: int):
     if index > len(tests):
         raise RuntimeError(f'Failed to get {index}th case')
     return res.get(index, False) == output
+
+
+def isPalindrome(s: str) -> bool:
+    s = ''.join(list(filter(str.isalnum, s))).lower()
+
+    return s == s[::-1]
 
 
 def main():
