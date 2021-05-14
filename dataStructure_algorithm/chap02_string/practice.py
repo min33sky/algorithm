@@ -48,3 +48,7 @@ result = [c in string.hexdigits for c in s]
 print(result)
 
 print(all(result))
+
+
+str1 = 'faker'
+print(''.join(sorted(str1)))

@@ -1,5 +1,3 @@
-# 그룹 애너그램
-
 from typing import List
 import collections
 
@@ -26,7 +24,7 @@ def is_same_2d_list(alist: List, blist: List):
     a_set = set(map(tuple, alist))
     b_set = set(map(tuple, blist))
 
-    return a_set == b_set
+    return sorted(a_set) == sorted(b_set)
 
 
 def check_result(index: int, output: List):
@@ -40,7 +38,12 @@ def groupAnagrams(strs: List[str]) -> List[List[str]]:
     hashmap = collections.defaultdict(list)
 
     for s in strs:
-        hashmap[''.join(sorted(s))].append(s)
+        count = [0] * 26
+
+        for ch in s:
+            count[ord(ch) - ord('a')] += 1
+
+        hashmap[tuple(count)].append(s)
 
     return hashmap.values()
 
