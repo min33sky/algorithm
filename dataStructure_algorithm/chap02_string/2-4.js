@@ -36,6 +36,7 @@ function groupAnagram2(strs) {
 
     // ? 키가 배열일 경우 배열 요소가 같아도 주소가 다르기 때문에 동등 비교가 불가능
     const key = arr.toString();
+    console.log('key: ', key);
 
     if (hashmap.has(key)) {
       hashmap.get(key).push(item);

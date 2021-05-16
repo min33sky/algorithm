@@ -1,4 +1,4 @@
-import string
+import re
 from typing import List
 
 tests = {
@@ -28,36 +28,25 @@ def check_result(index: int, output: str):
     return res.get(index, "") == output
 
 
-def check_ip_v4(ipv4: str) -> str:
-    ipnums = ipv4.split('.')
-
-    for num in ipnums:
-        if len(num) == 0 or len(num) > 3:
-            return 'Neither'
-
-        if (len(num) != 1 and num[0] == '0') or \
-                not num.isdigit() or int(num) > 255:
-            return 'Neither'
-    return 'IPv4'
-
-
-def check_ip_v6(ipv6: str) -> str:
-    ipnums = ipv6.split(':')
-
-    for num in ipnums:
-        if len(num) == 0 or len(num) > 4 or \
-                not all(c in string.hexdigits for c in num):
-            return 'Neither'
-    return 'IPv6'
-
-
 def validIPAddress(IP: str) -> str:
-    if IP.count('.') == 3:
-        return check_ip_v4(IP)
-    elif IP.count(':') == 7:
-        return check_ip_v6(IP)
+    IPV4 = '(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])'
 
-    return 'Neither'
+    ipv4 = \
+        re.compile(r'^({p}\.){{3}}{p}$'.format(p=IPV4))
+
+    if ipv4.match(IP):
+        return "IPv4"
+
+    IPV6 = '([0-9a-f]{1,4})'
+
+    ipv6 = \
+        re.compile(r'^({p}\:){{7}}{p}$'.format(p=IPV6),
+                   re.IGNORECASE)
+
+    if ipv6.match(IP):
+        return "IPv6"
+
+    return "Neither"
 
 
 def main():
