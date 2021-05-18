@@ -1,4 +1,3 @@
-# 순환 검출
 from linked_list import Node, LinkedList
 from typing import List
 import collections
@@ -39,29 +38,15 @@ def check_result(index: int, output: bool):
 
 
 def hasCycle(head: Node) -> bool:
-    outer = head
-    node_cnt = 0
+    slow = head
+    fast = head
 
-    while (outer != None and outer.next != None):
-        outer = outer.next
-        node_cnt += 1
+    while fast != None and fast.next != None:
+        slow = slow.next
+        fast = fast.next.next
 
-        visit = node_cnt
-        inner = head
-
-        matched = 0
-
-        while visit > 0:
-            if outer != inner:
-                inner = inner.next
-
-            if outer == inner:
-                matched += 1
-
-            if matched == 2:
-                return True
-
-            visit -= 1
+        if slow == fast:
+            return True
 
     return False
 

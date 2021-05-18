@@ -29,6 +29,7 @@ def check_result(index: int, output: str):
 
 
 def validIPAddress(IP: str) -> str:
+    # 1 ~ 255까지 숫자
     IPV4 = '(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])'
 
     ipv4 = \
@@ -37,6 +38,7 @@ def validIPAddress(IP: str) -> str:
     if ipv4.match(IP):
         return "IPv4"
 
+    # 16진수 숫자가 1~4자리
     IPV6 = '([0-9a-f]{1,4})'
 
     ipv6 = \

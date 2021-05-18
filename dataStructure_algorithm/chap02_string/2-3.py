@@ -44,8 +44,6 @@ def isPalindrome(word: str):
 
     return True
 
-    pass
-
 
 def check_result(index: int, output: int):
     if index > len(tests):
