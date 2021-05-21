@@ -21,14 +21,16 @@ def check_result(index: int, output: List):
     return is_same_list(output, res.get(index, []))
 
 
-def find_permutation(res, chs, s, e):
-    if s == e - 1:
-        res.append("".join(chs))
+def find_permutation(res, chs, start, end):
+    if start == end - 1:
+        res.append(''.join(chs))
     else:
-        for i in range(s, e):
-            chs[s], chs[i] = chs[i], chs[s]
-            find_permutation(res, chs, s + 1, e)
-            chs[s], chs[i] = chs[i], chs[s]
+        for idx in range(start, end):
+            # 교환 후 재귀 호출
+            chs[start], chs[idx] = chs[idx], chs[start]
+            find_permutation(res, chs, start+1, end)
+            # 다시 원상 복구(백트래킹)
+            chs[start], chs[idx] = chs[idx], chs[start]
 
 
 def main():
