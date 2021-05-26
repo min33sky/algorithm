@@ -24,3 +24,13 @@ print(heap[0])
 heap = [35, 44, 42, 10, 14]
 heapq.heapify(heap)
 print('heap: ', heap)
+
+
+# 최대힙으로 변경
+heap = [35, 44, 42, 10, 14]
+heap_max = [item * -1 for item in heap]
+
+heapq.heapify(heap_max)
+print('heap: ', heap_max)
+heap_max = [item * -1 for item in heap_max]
+print('heap_max: ', heap_max)

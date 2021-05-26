@@ -19,29 +19,38 @@ res = {
 
 
 def pathSum(root: Node, sum: int) -> int:
-    result = 0
-    acc = {0: 1}
+    cnt = 0
 
-    def pathSumSub(node: Node, curr_acc):
-        nonlocal result
+    if root == None:
+        return cnt
+
+    # 깊이 우선 탐색으로 현재 노드를 루트로하는 하위 트리의 모든 경로를 찾고 부분합을 구하기
+    def pathSumSub(node: Node, target: int) -> int:
         if node == None:
-            return
+            return 0
 
-        key_value = curr_acc + node.data - sum
-        if key_value in acc:
-            result += acc[key_value]
+        return (1 if (target - node.data) == 0 else 0) +\
+            pathSumSub(node.left, target - node.data) +\
+            pathSumSub(node.right, target - node.data)
 
-        curr_acc += node.data
-        acc.setdefault(curr_acc, 0)
-        acc[curr_acc] += 1
-        pathSumSub(node.left, curr_acc)
-        pathSumSub(node.right, curr_acc)
-        acc[curr_acc] -= 1
+    queue = deque()
+    queue.append(root)
 
-        return
+    # 너비 우선 탐색으로 트리의 모든 노드를 방문
+    while len(queue) != 0:
+        q_size = len(queue)
 
-    pathSumSub(root, 0)
-    return result
+        for _ in range(q_size):
+            node = queue.popleft()
+
+            cnt += pathSumSub(node, sum)
+
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+
+    return cnt
 
 
 def parse_tree(tree_input):

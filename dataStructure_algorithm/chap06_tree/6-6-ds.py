@@ -18,30 +18,21 @@ res = {
 }
 
 
-def pathSum(root: Node, sum: int) -> int:
-    result = 0
-    acc = {0: 1}
+def pathSum(root: Node, sum_val: int) -> int:
+    if root == None:
+        return 0
 
-    def pathSumSub(node: Node, curr_acc):
-        nonlocal result
+    def pathSubSum(node: Node, target: int):
         if node == None:
-            return
+            return 0
 
-        key_value = curr_acc + node.data - sum
-        if key_value in acc:
-            result += acc[key_value]
+        return (1 if (target - node.data == 0) else 0) +\
+            pathSubSum(node.left, target - node.data) +\
+            pathSubSum(node.right, target-node.data)
 
-        curr_acc += node.data
-        acc.setdefault(curr_acc, 0)
-        acc[curr_acc] += 1
-        pathSumSub(node.left, curr_acc)
-        pathSumSub(node.right, curr_acc)
-        acc[curr_acc] -= 1
-
-        return
-
-    pathSumSub(root, 0)
-    return result
+    return pathSubSum(root, sum_val) +\
+        pathSubSum(root.left, sum_val) +\
+        pathSubSum(root.right, sum_val)
 
 
 def parse_tree(tree_input):
