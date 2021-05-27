@@ -27,6 +27,7 @@ def pathSum(root: Node, sum: int) -> int:
         if node == None:
             return
 
+        # 누적값 + 현재 노드값 - 요청 합을 해시테이블에서 찾는다.
         key_value = curr_acc + node.data - sum
         if key_value in acc:
             result += acc[key_value]
